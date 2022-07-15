@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+        .header {
+            min-height: 100vh;
+            width: 100%;
+            /*background-image: linear-gradient(rgba(27, 54, 175, 0.7), rgba(44, 82, 246, 0.7));*/
+            background-color: #fff;
+            background-position: center;
+            background-size: cover;
+            position: relative;
+        }
+        nav {
+            display: flex;
+            padding: 2% 6%;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav img {
+            width: 200px;
+        }
+        .nav-links {
+            flex: 1;
+            text-align: right;
+        }
+        .nav-links ul li {
+            list-style: none;
+            display: inline-block;
+            padding: 8px 12px;
+            position: relative;
+        }
+        .nav-links ul li a{
+            color: #2D64BC;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .nav-links ul li::after {
+            content: '';
+            width: 0%;
+            height: 2px;
+            background: #2D64BC;
+            display: block;
+            margin: auto;
+            transition: 0.5s;
+        }
+        .nav-links ul li:hover::after {
+            width: 100%;
+        }
+        .logoimg {
+            height: 3%;
+            width: 3%;
+        }
+        .text-box {
+            font-size: 30px;
+            width: 90%;
+            position: absolute;
+            top: 30%;
+            left: 10%;
+        }
+        .text-box2 {
+            font-size: 20px;
+            width: 90%;
+            position: absolute;
+            top: 50%;
+            /*left: 10%;*/
+        }
+        .EduLab-button {
+            color: #2D64BC;
+            text-decoration: none;
+            font-size: large;
+            font-family: 'Poppins', sans-serif;
+            font-style: italic;
+            padding: 2%;
+            justify-content: space-around;
+        }
+        .EduLab-button::after{
+            content: '';
+            width: 0%;
+            height: 2px;
+            background: #2D64BC;
+            display: block;
+            margin: auto;
+            transition: 0.5s;
+        }
+        .EduLab-button:hover::after{
+            width: 100%;
+        }
+        .button1 {
+            border-radius: 5%;
+            top: 20%;
+            height: 30px;
+            width: 12%;
+            background-color: #2D64BC;
+            color: #fff;
+            border: 0px;
+            transition-duration: 0.5s;
+        }
+        .button1:hover{
+            background-color: #2D64BC;
+            border: 0px;
+            color: #fff;
+        }
+    </style>
+    <meta charset="UTF-8" name="viewpoint" content="with=device_width, initial-scale=1.0">
+    <title>EduLab: онлайн курсы для обучения IT-профессиям</title>
+    <link href="../css_templates/style.css" rel="stylesheet" >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<section class="header">
+    <nav>
+        <a href="/" class="logoimg"><img src="../images/logo_v2.jpg"></a>
+        <a href="/" class="EduLab-button"><b>EduLab</b></a>
+        <div class="nav-links">
+            <ul>
+                <li><a href="/auth/sign-in">Login</a></li>
+                <li><a href="/auth/sign-up">Register</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="text-box">
+        <b><p><b style="color: #2D64BC">EduLab</b> – ваш прямой<br>путь в IT-профессии</p></b><br>
+        <p class="text-box2">Здесь каждый найдет<br>занятие мечты</p><br>
+        <a href="/courses"><button class="button1">Перейти в каталог</button></a>
+    </div>
+</section> <br><br>
+</body>
+</html>
