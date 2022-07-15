@@ -2,26 +2,124 @@
 <html lang="en">
 <head>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
         .header {
             min-height: 100vh;
             width: 100%;
-            background-image: linear-gradient(rgba(27, 54, 175, 0.7), rgba(44, 82, 246, 0.7));
+            /*background-image: linear-gradient(rgba(27, 54, 175, 0.7), rgba(44, 82, 246, 0.7));*/
+            background-color: #fff;
             background-position: center;
             background-size: cover;
             position: relative;
         }
+
         nav {
             display: flex;
             padding: 2% 6%;
             justify-content: space-between;
             align-items: center;
         }
+
+        nav img {
+            width: 200px;
+        }
+
+        .nav-links {
+            flex: 1;
+            text-align: right;
+        }
+
+        .nav-links ul li {
+            list-style: none;
+            display: inline-block;
+            padding: 8px 12px;
+            position: relative;
+        }
+
+        .nav-links ul li a {
+            color: #2D64BC;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .nav-links ul li::after {
+            content: '';
+            width: 0%;
+            height: 2px;
+            background: #2D64BC;
+            display: block;
+            margin: auto;
+            transition: 0.5s;
+        }
+
+        .nav-links ul li:hover::after {
+            width: 100%;
+        }
+        .logoimg {
+            height: 2%;
+            width: 2%;
+        }
+        .EduLab-button {
+            color: #2D64BC;
+            text-decoration: none;
+            font-size: large;
+            font-family: 'Poppins', sans-serif;
+            font-style: italic;
+            padding: 2%;
+            justify-content: space-around;
+        }
+        .EduLab-button::after {
+            content: '';
+            width: 0%;
+            height: 2px;
+            background: #2D64BC;
+            display: block;
+            margin: auto;
+            transition: 0.5s;
+        }
+        .EduLab-button:hover::after {
+            width: 100%;
+        }
+        .auth {
+            position: absolute;
+            width: 15%;
+            top: 30%;
+            left: 45%;
+        }
+        .submbut1 {
+            width: 40%;
+            color: #fff;
+            background-color: #2D64BC;
+            border-radius: 20%;
+            border: 0;
+        }
     </style>
     <meta charset="UTF-8" name="viewpoint" content="with=device_width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="../css_templates/style.css">
+    <link href="../css_templates/style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
 </head>
 <body>
+
+<section class="header">
+    <nav>
+        <a href="/" class="logoimg"><img src="../images/logo_v2.jpg"></a>
+        <a href="/" class="EduLab-button"><b>EduLab</b></a>
+        <div class="nav-links">
+            <ul>
+                <li><a href="/auth/sign-up">Sign-Up</a></li>
+            </ul>
+        </div>
+    </nav>
+</section>
 
 <section class="auth">
     <form action="/" method="get">
@@ -29,8 +127,9 @@
         <input type="text" id="fname" name="fname" placeholder="name"><br><br>
         <label for="flastname">Last Name: </label>
         <input type="text" id="flastname" name="flastname" placeholder="surname"><br><br>
-        <button type="submit">Login</button><br><br>
-        <button type="submit" formmethod="post">Submit using post</button>
+        <button type="submit" class="submbut1">Login</button>
+        <br><br>
+{{/*        <button type="submit" formmethod="post">Submit using post</button>*/}}
     </form>
 </section>
 </body>

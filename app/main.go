@@ -8,6 +8,7 @@ import (
 	"github.com/khusainnov/edulab/pkg/handler"
 	"github.com/khusainnov/edulab/pkg/repository"
 	"github.com/khusainnov/edulab/pkg/service"
+	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
@@ -25,8 +26,22 @@ func main() {
 		logrus.Errorf("Cannot load .yml config, due to error: %v", err)
 	}
 
+	logrus.Infoln("Initializing DB")
+	db, err := repository.NewPostgresDB(repository.Config{
+		Host:     viper.GetString("db.host"),
+		Port:     viper.GetString("db.port"),
+		Username: viper.GetString("db.username"),
+		Password: os.Getenv("DB_PASSWORD"),
+		DBName:   viper.GetString("db.dbname"),
+		SSLMode:  viper.GetString("db.sslmode"),
+	})
+
+	if err != nil {
+		logrus.Errorf("Cannot initialize db, due to error: %s", err.Error())
+	}
+
 	logrus.Infoln("Initializing repository")
-	repos := repository.NewRepository()
+	repos := repository.NewRepository(db)
 
 	logrus.Infoln("Initializing services")
 	services := service.NewService(repos)

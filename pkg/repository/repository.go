@@ -1,6 +1,9 @@
 package repository
 
-import "github.com/khusainnov/edulab/internal/entity/user"
+import (
+	"github.com/jmoiron/sqlx"
+	"github.com/khusainnov/edulab/internal/entity/user"
+)
 
 type Authorization interface {
 	CreateUser(u user.User) (int, error)
@@ -11,6 +14,8 @@ type Repository struct {
 	Authorization
 }
 
-func NewRepository() *Repository {
-	return &Repository{}
+func NewRepository(db *sqlx.DB) *Repository {
+	return &Repository{
+		//Authorization: NewAuthPostgres(db),
+	}
 }
