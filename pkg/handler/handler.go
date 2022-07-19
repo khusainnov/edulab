@@ -25,9 +25,11 @@ func (h *Handler) InitRoutes() *mux.Router {
 	r := mux.NewRouter()
 
 	r.HandleFunc("/", h.GreetingPage)
+	r.HandleFunc("/about", h.About)
 
-	r.HandleFunc("/auth/sign-up", h.SignUp)
+	r.HandleFunc("/auth/sign-up", h.SignUp).Methods("GET", "POST")
 	r.HandleFunc("/auth/sign-in", h.SignIn)
+	r.HandleFunc("/logout", h.Logout)
 
 	r.HandleFunc("/courses", h.Courses)
 

@@ -2,36 +2,139 @@
 <html lang="en">
 <head>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
         .header {
             min-height: 100vh;
             width: 100%;
-            background-image: linear-gradient(rgba(27, 54, 175, 0.7), rgba(44, 82, 246, 0.7));
+            /*background-image: linear-gradient(rgba(27, 54, 175, 0.7), rgba(44, 82, 246, 0.7));*/
+            background-color: #fff;
             background-position: center;
             background-size: cover;
             position: relative;
         }
+
         nav {
             display: flex;
             padding: 2% 6%;
             justify-content: space-between;
             align-items: center;
         }
+
+        nav img {
+            width: 200px;
+        }
+
+        .nav-links {
+            flex: 1;
+            text-align: right;
+        }
+
+        .nav-links ul li {
+            list-style: none;
+            display: inline-block;
+            padding: 8px 12px;
+            position: relative;
+        }
+
+        .nav-links ul li a {
+            color: #2D64BC;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .nav-links ul li::after {
+            content: '';
+            width: 0%;
+            height: 2px;
+            background: #2D64BC;
+            display: block;
+            margin: auto;
+            transition: 0.5s;
+        }
+
+        .nav-links ul li:hover::after {
+            width: 100%;
+        }
+        .logoimg {
+            height: 2%;
+            width: 2%;
+        }
+        .EduLab-button {
+            color: #2D64BC;
+            text-decoration: none;
+            font-size: large;
+            font-family: 'Poppins', sans-serif;
+            font-style: italic;
+            padding: 2%;
+            justify-content: space-around;
+        }
+        .EduLab-button::after {
+            content: '';
+            width: 0%;
+            height: 2px;
+            background: #2D64BC;
+            display: block;
+            margin: auto;
+            transition: 0.5s;
+        }
+        .EduLab-button:hover::after {
+            width: 100%;
+        }
+        .auth {
+            position: absolute;
+            width: 13%;
+            top: 30%;
+            left: 45%;
+        }
+        .submbut1 {
+            width: 40%;
+            color: #fff;
+            background-color: #2D64BC;
+            border-radius: 20%;
+            border: 0;
+        }
     </style>
     <meta charset="UTF-8" name="viewpoint" content="with=device_width, initial-scale=1.0">
     <title>Registration</title>
-    <link rel="stylesheet" href="../css_templates/style.css">
+    <link href="css_templates/style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
 </head>
 <body>
 
-    <section class="auth">
-        <form action="/" method="post">
-            <label for="fname">First Name: </label>
-            <input type="text" id="fname" name="fname" placeholder="name"><br><br>
-            <label for="flastname">Last Name: </label>
-            <input type="text" id="flastname" name="flastname" placeholder="surname"><br><br>
-            <button type="submit">Login</button><br><br>
-{{/*            <button type="submit" formmethod="post">Submit using post</button>*/}}
-        </form>
-    </section>
+<section class="header">
+    <nav>
+        <a href="/" class="logoimg"><img src="../images/logo_v2.img"></a>
+        <a href="/" class="EduLab-button"><b>EduLab</b></a>
+        <div class="nav-links">
+            <ul>
+                <li><a href="/auth/sign-in">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+</section>
+
+<section class="auth">
+    <form action="/auth/sign-up" method="POST">
+        <label for="fname">First Name </label>
+        <input type="text" id="fname" name="fname" placeholder="name" value="{{ .Name }}"><br><br>
+        <label for="flastname">Last Name </label>
+        <input type="text" id="flastname" name="flastname" placeholder="surname" value="{{ .Surname }}"><br><br>
+        <label for="fusername">Username </label>
+        <input type="text" id="fusername" name="fusername" placeholder="username" value="{{ .Username }}"><br><br>
+        <label for="femail">Email </label>
+        <input type="text" id="femail" name="femail" placeholder="email@gmail.com" value="{{ .Email }}"><br><br>
+        <label for="fpassword">Password </label>
+        <input type="password" id="fpassword" name="fpassword" placeholder="password" value="{{ .Password }}" required><br><br>
+        <button type="submit" class="submbut1">Sign-Up</button>
+    </form>
+</section>
 </body>
 </html>

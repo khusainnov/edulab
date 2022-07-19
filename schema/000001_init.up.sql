@@ -12,5 +12,7 @@ create table Users
     Username      varchar(255)       not null unique,
     Email         varchar(255)       not null unique,
     Password_hash varchar(255)       not null,
-    Role_id       int references Roles (id) on delete cascade not null
+    Role_id       int references Roles (id) on delete cascade
 );
+
+INSERT INTO Roles (Role_name) VALUES ('admin');
