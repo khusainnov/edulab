@@ -7,5 +7,5 @@ type User struct {
 	Username string `json:"username,omitempty" binding:"required"`
 	Email    string `json:"email" binding:"required"`
 	Password string `json:"password,omitempty" binding:"required"`
-	RoleID   string `json:"role_id" binding:"required"`
+	RoleName string `json:"role_name" binding:"required"`
 }

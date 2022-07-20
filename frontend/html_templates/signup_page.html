@@ -98,6 +98,16 @@
             border-radius: 20%;
             border: 0;
         }
+        .breactangle {
+            position: absolute;
+            /*text-align: center;*/
+            padding: 10% 50%;
+            /*justify-content: space-around;*/
+            border-radius: 3%;
+            background: rgba(152, 155, 161, 0.35);
+            color: white;
+            border: #a0a0a0;
+        }
     </style>
     <meta charset="UTF-8" name="viewpoint" content="with=device_width, initial-scale=1.0">
     <title>Registration</title>
@@ -122,19 +132,21 @@
 </section>
 
 <section class="auth">
-    <form action="/auth/sign-up" method="POST">
-        <label for="fname">First Name </label>
-        <input type="text" id="fname" name="fname" placeholder="name" value="{{ .Name }}"><br><br>
-        <label for="flastname">Last Name </label>
-        <input type="text" id="flastname" name="flastname" placeholder="surname" value="{{ .Surname }}"><br><br>
-        <label for="fusername">Username </label>
-        <input type="text" id="fusername" name="fusername" placeholder="username" value="{{ .Username }}"><br><br>
-        <label for="femail">Email </label>
-        <input type="text" id="femail" name="femail" placeholder="email@gmail.com" value="{{ .Email }}"><br><br>
-        <label for="fpassword">Password </label>
-        <input type="password" id="fpassword" name="fpassword" placeholder="password" value="{{ .Password }}" required><br><br>
-        <button type="submit" class="submbut1">Sign-Up</button>
-    </form>
+    <div {{/*class="breactangle"*/}}>
+        <form action="/auth/sign-up" method="POST">
+            <label for="fname">First Name </label>
+            <input type="text" id="fname" name="fname" placeholder="Name" value="{{ .Name }}"><br><br>
+            <label for="fsurname">Last Name </label>
+            <input type="text" id="fsurname" name="fsurname" placeholder="Surname" value="{{ .Surname }}"><br><br>
+            <label for="fusername">Username </label>
+            <input type="text" id="fusername" name="fusername" placeholder="Username" value="{{ .Username }}"><br><br>
+            <label for="femail">Email </label>
+            <input type="text" id="femail" name="femail" placeholder="Email@gmail.com" value="{{ .Email }}"><br><br>
+            <label for="fpassword">Password </label>
+            <input type="password" id="fpassword" name="fpassword" placeholder="Password" value="{{ .Password }}" required><br><br>
+            <button type="submit" class="submbut1">Sign-Up</button>
+        </form>
+    </div>
 </section>
 </body>
 </html>

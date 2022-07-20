@@ -3,6 +3,7 @@ package handler
 import (
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/khusainnov/edulab/internal/entity/user"
 	"github.com/sirupsen/logrus"
@@ -44,25 +45,69 @@ func (h *Handler) SignUp(w http.ResponseWriter, r *http.Request) {
 			fmt.Println(input.Password)
 			fmt.Printf("Username: %v\n", input.Username)
 
-			//_, err := h.services.CreateUser(input)
-			//if err != nil {
-			//	logrus.Errorf("hadnler/auth - SignUp: %s", err.Error())
-			//}
-			err := tml.ExecuteTemplate(w, "signup_thanks.html", &input)
+			id, err := h.services.CreateUser(input)
+			if err != nil {
+				logrus.Errorf("code: %d, hadnler/auth - SignUp: %s", http.StatusInternalServerError, err.Error())
+			}
+			fmt.Println(id)
+			err = tml.ExecuteTemplate(w, "signup_thanks.html", &input)
 			if err != nil {
 				logrus.Errorf("Cannot execute \"signup_thanks\" template, due to error: %s", err.Error())
 			}
+			/*switch err {
+			case err:
+				if err != nil {
+					logrus.Errorf("code: %d, hadnler/auth - SignUp: %s", http.StatusInternalServerError, err.Error())
+				}
+			default:
+				fmt.Println(id)
+				err = tml.ExecuteTemplate(w, "signup_thanks.html", &input)
+				if err != nil {
+					logrus.Errorf("Cannot execute \"signup_thanks\" template, due to error: %s", err.Error())
+				}
+			}*/
 		}
 	}
 }
 
+type SignInInput struct {
+	Login    string `json:"username,password,login,omitempty" binding:"required"`
+	Password string `json:"password" binding:"required"`
+}
+
 func (h *Handler) SignIn(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+	}
+
+	var input SignInInput
+
 	logrus.Infoln("SignIn page loading")
 	logrus.Infoln("Executing auth page")
 	err := tml.ExecuteTemplate(w, "signin_page.html", nil)
 	if err != nil {
 		logrus.Errorf("Cannot execute \"signin_page\", due to error: %s", err.Error())
 	}
+
+	input = SignInInput{
+		Login:    r.FormValue("flogin"),
+		Password: r.FormValue("fpassword"),
+	}
+
+	token, err := h.services.Authorization.GenerateToken(input.Login, input.Password)
+	if err != nil {
+		logrus.Errorf("code: %d, hadnler/auth - SignUp: %s", http.StatusInternalServerError, err.Error())
+		http.Redirect(w, r, "/", http.StatusInternalServerError)
+	}
+
+	cookie := &http.Cookie{
+		Name:    "token",
+		Value:   token,
+		Expires: time.Now().Add(time.Hour * 12),
+	}
+	r.AddCookie(cookie)
+	fmt.Println(token)
+	http.Redirect(w, r, "/", http.StatusOK)
 }
 
 func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {

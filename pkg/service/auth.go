@@ -11,37 +11,36 @@ import (
 )
 
 const (
-	salt       = "45njh5n34jh5jh3n4j2"
-	signingKey = "4hbj4b5k34b5hg3bh42b4h234h2bh"
+	salt       = "423r2wedc2r32recdqw"
 	tokenTTL   = time.Hour * 12
+	signingKey = "4hgb53kh4b5h3g4b345j"
 )
+
+type AuthService struct {
+	repos repository.Authorization
+}
 
 type tokenClaims struct {
 	jwt.StandardClaims
 	UserId int `json:"user_id"`
 }
 
-type AuthService struct {
-	repos *repository.Repository
-}
-
-func NewAuthService(repos *repository.Repository) *AuthService {
+func NewAuthService(repos repository.Authorization) *AuthService {
 	return &AuthService{repos: repos}
 }
 
 func (as *AuthService) CreateUser(u user.User) (int, error) {
 	u.Password = generatePasswordHash(u.Password)
-
 	return as.repos.CreateUser(u)
 }
 
-func (as *AuthService) GenerateToken(username, password string) (string, error) {
-	u, err := as.repos.GetUser(username, generatePasswordHash(password))
+func (as *AuthService) GenerateToken(login, password string) (string, error) {
+	u, err := as.repos.GetUser(login, generatePasswordHash(password))
 	if err != nil {
 		return "", err
 	}
 
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, tokenClaims{
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, &tokenClaims{
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(tokenTTL).Unix(),
 			IssuedAt:  time.Now().Unix(),
