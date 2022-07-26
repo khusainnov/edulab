@@ -33,5 +33,16 @@ func (h *Handler) InitRoutes() *mux.Router {
 
 	r.HandleFunc("/courses", h.Courses)
 
+	api := r.PathPrefix("/api").Subrouter()
+	api.Use(h.UserIdentity)
+	{
+		api.HandleFunc("/profile", h.Profile)
+
+		profile := api.PathPrefix("/profile").Subrouter()
+		{
+			profile.HandleFunc("/settings", nil).Methods("GET", "POST")
+		}
+	}
+
 	return r
 }

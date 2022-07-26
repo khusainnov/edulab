@@ -76,10 +76,6 @@ type SignInInput struct {
 }
 
 func (h *Handler) SignIn(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		http.Redirect(w, r, "/", http.StatusSeeOther)
-	}
-
 	var input SignInInput
 
 	logrus.Infoln("SignIn page loading")
@@ -87,6 +83,10 @@ func (h *Handler) SignIn(w http.ResponseWriter, r *http.Request) {
 	err := tml.ExecuteTemplate(w, "signin_page.html", nil)
 	if err != nil {
 		logrus.Errorf("Cannot execute \"signin_page\", due to error: %s", err.Error())
+	}
+
+	if r.Method != http.MethodGet {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
 
 	input = SignInInput{

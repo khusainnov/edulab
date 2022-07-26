@@ -7,6 +7,6 @@ d-up:
 	docker run --name=edulab -e POSTGRES_PASSWORD='qwerty' -p 5434:5432 -d --rm postgres
 
 d-exec:
-	docker exec -it 02381158f9cc /bin/bash
+	docker exec -it 99bfbb8ce4a1 /bin/bash
 d-stop:
-	docker stop 02381158f9cc
+	docker stop 99bfbb8ce4a1
